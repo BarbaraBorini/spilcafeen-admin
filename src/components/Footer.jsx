@@ -9,7 +9,6 @@ export default function Footer() {
         </p>
       </div>
 
-      {/* bottom paragraph */}
       <p className="footer-bottom">
         © 2026 Spilcafeen — designed and developed for educational purposes.
       </p>

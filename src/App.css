@@ -1,42 +1,217 @@
+/* Reset */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fb;
+}
+
+/* ROOT FIX (important) */
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Page layout */
+
+.page-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 30px;
+}
+
+/* HEADER */
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1f2937;
+  padding: 20px 40px;
+  flex-wrap: wrap;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* GAME GRID */
+
+.user-games {
+  margin-top: 30px;
+}
+
+/* responsive card layout */
+
+.user-games > div,
+.game-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* GAME CARD */
+
+.game-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+}
+
+.game-card h3 {
+  margin-top: 0;
+}
+
+/* ACTION BUTTONS */
+
+.game-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  background: #2563eb;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1e40af;
+}
+
+/* FORMS */
+
+form {
+  width: 100%;
+  max-width: 550px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* FILTER BAR */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.filters input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filters select {
+  width: 200px;
+}
+
+/* FOOTER */
+
+.site-footer {
+  margin-top: 60px;
+  padding: 25px;
+  background: #1f2937;
+  color: white;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #41b24baa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+/* ================= */
+/* RESPONSIVE BREAKPOINTS */
+/* ================= */
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* laptop */
+
+@media (max-width: 1200px) {
+
+  .page-container {
+    padding: 25px;
   }
-  to {
-    transform: rotate(360deg);
+
+}
+
+/* tablet */
+
+@media (max-width: 900px) {
+
+  .site-header {
+    flex-direction: column;
+    gap: 15px;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  nav {
+    justify-content: center;
   }
+
 }
 
-.card {
-  padding: 2em;
-}
+/* mobile */
 
-.read-the-docs {
-  color: #888;
+@media (max-width: 600px) {
+
+  .page-container {
+    padding: 15px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  form {
+    padding: 20px;
+  }
+
 }

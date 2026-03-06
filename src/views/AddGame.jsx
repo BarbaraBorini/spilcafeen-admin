@@ -1,34 +1,29 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GameList from "../components/GameList";
-import SearchField from "../components/Searchfield";
+import Searchfield from "../components/Searchfield";
 
 export default function AddGame() {
 
-  // Load saved games from localStorage
   const [games, setGames] = useState(() => {
     const savedGames = localStorage.getItem("games");
     return savedGames ? JSON.parse(savedGames) : [];
   });
 
-  // Form fields
-  const [commonName, setCommonName] = useState("");
+  const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [players, setPlayers] = useState("");
   const [time, setTime] = useState("");
 
-  // Filters
   const [filterText, setFilterText] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
 
   const navigate = useNavigate();
 
-  // Save plants
   useEffect(() => {
     localStorage.setItem("games", JSON.stringify(games));
   }, [games]);
 
-  // Create new plant
   function createHandler(e) {
     e.preventDefault();
 
@@ -50,15 +45,13 @@ export default function AddGame() {
     navigate("/");
   }
 
-  // Filter plants
   const filteredGames = games.filter((game) =>
-    game.commonName.toLowerCase().includes(filterText.toLowerCase()) &&
+    game.title.toLowerCase().includes(filterText.toLowerCase()) &&
     (categoryFilter === "" || game.category === categoryFilter)
   );
 
   return (
     <>
-    
       <form onSubmit={createHandler}>
         <h2>Add a game</h2>
 
@@ -72,7 +65,7 @@ export default function AddGame() {
           />
         </div>
 
-           <div>
+        <div>
           <label>Category:</label>
           <select
             required
@@ -106,25 +99,21 @@ export default function AddGame() {
           />
         </div>
 
-    
-
         <button type="submit">Add Game</button>
       </form>
 
-    
       <section className="user-games">
         <h2>My Games Database</h2>
 
-        
         <div className="filters">
-          <SearchField
+          <Searchfield
             handleInput={(e) => setFilterText(e.target.value)}
             filter={filterText}
           />
 
           <select
-            value={levelFilter}
-            onChange={(e) => setLevelFilter(e.target.value)}
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
           >
             <option value="">All categories</option>
             <option value="Beginner">Beginner</option>

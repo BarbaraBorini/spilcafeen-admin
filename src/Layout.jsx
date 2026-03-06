@@ -7,7 +7,6 @@ export default function Layout() {
     <>
       <Header />
 
-      {/* ⭐ THIS WRAPPER IS THE IMPORTANT PART */}
       <main className="page-container">
         <Outlet />
       </main>

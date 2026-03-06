@@ -5,27 +5,22 @@ export default function EditGame() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // Load plants from localStorage
-  const [pgames, setGames] = useState(() => {
+  const [games, setGames] = useState(() => {
     const savedGames = localStorage.getItem("games");
     return savedGames ? JSON.parse(savedGames) : [];
   });
 
-  // Find the plant to edit
-  const game = games.find((p) => p.id === Number(id));
+  const game = games.find((g) => g.id === Number(id));
 
-  // Form state
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [players, setPlayers] = useState("");
   const [time, setTime] = useState("");
 
-  // Save plants whenever updated
   useEffect(() => {
     localStorage.setItem("games", JSON.stringify(games));
   }, [games]);
 
-  // Fill form when plant is found
   useEffect(() => {
     if (game) {
       setTitle(game.title || "");
@@ -35,7 +30,6 @@ export default function EditGame() {
     }
   }, [game]);
 
-  // Update plant
   function updateHandler(e) {
     e.preventDefault();
 
@@ -48,8 +42,8 @@ export default function EditGame() {
     };
 
     setGames(
-      games.map((p) =>
-        p.id === Number(id) ? updatedGame : p
+      games.map((g) =>
+        g.id === Number(id) ? updatedGame : g
       )
     );
 
@@ -94,7 +88,7 @@ export default function EditGame() {
         <input
           type="text"
           required
-          value={light}
+          value={players}
           onChange={(e) => setPlayers(e.target.value)}
         />
       </div>
