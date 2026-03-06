@@ -14,6 +14,7 @@ const router = createBrowserRouter([
       { path: "create", element: <AddGamePage /> },
       { path: "update/:id", element: <EditGamePage /> },
     ],
+    basename: "/spilcaeen-admin",
   },
 ]);
 
