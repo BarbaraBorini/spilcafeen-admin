@@ -4,9 +4,9 @@ import GameList from "../components/GameList";
 export default function DefaultPage() {
 
   const [games, setGames] = useState(() => {
-    const savedGames = localStorage.getItem("games");
-    return savedGames ? JSON.parse(savedGames) : [];
-  });
+  const savedGames = localStorage.getItem("games");
+  return savedGames ? JSON.parse(savedGames) : gamedatabase;
+});
 
   const [filterText, setFilterText] = useState("");
 
