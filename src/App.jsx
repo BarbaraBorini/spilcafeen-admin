@@ -5,18 +5,22 @@ import AddGamePage from "./views/AddGame";
 import EditGamePage from "./views/EditGame";
 import "./app.css";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        { index: true, element: <DefaultPage /> },
+        { path: "create", element: <AddGamePage /> },
+        { path: "update/:id", element: <EditGamePage /> },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <Layout />,
-    children: [
-      { index: true, element: <DefaultPage /> },
-      { path: "create", element: <AddGamePage /> },
-      { path: "update/:id", element: <EditGamePage /> },
-    ],
-  },
-]);
-
+    basename: "/spilcafeen-admin/",
+  }
+);
 
 function App() {
   return <RouterProvider router={router} />;
