@@ -40,7 +40,7 @@ export default function AddGame() {
       time,
     };
 
-    setGames([...games, newGame]);
+    setGames((prev) => [...prev, newGame]);
 
     navigate("/");
   }
