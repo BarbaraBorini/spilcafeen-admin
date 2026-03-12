@@ -43,4 +43,4 @@ export default function GameItem({ game, deleteHandler }) {
 
     </div>
   );
-} 
+}
