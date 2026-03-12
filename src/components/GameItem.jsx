@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
 
 export default function GameItem({ game, deleteHandler }) {
+
+  // Ensure categories always work (array or string)
+  const categories = Array.isArray(game.category)
+    ? game.category
+    : [game.category];
+
   return (
     <div className="game-card">
 
       {/* Category tags */}
       <div className="category-tags">
-        {game.category.map((cat) => (
+        {categories.map((cat) => (
           <span key={cat} className="category-tag">
             {cat}
           </span>
@@ -18,13 +24,8 @@ export default function GameItem({ game, deleteHandler }) {
 
       {/* Game details */}
       <div className="game-info">
-        <p>
-          <strong>Players:</strong> {game.players}
-        </p>
-
-        <p>
-          <strong>Time:</strong> {game.time}
-        </p>
+        <p><strong>Players:</strong> {game.players}</p>
+        <p><strong>Time:</strong> {game.time}</p>
       </div>
 
       {/* Actions */}

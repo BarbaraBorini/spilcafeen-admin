@@ -35,7 +35,7 @@ export default function AddGame() {
     const newGame = {
       id: highestId + 1,
       title,
-      category,
+      category: [category],   // important fix
       players,
       time,
     };
@@ -50,9 +50,12 @@ export default function AddGame() {
       .toLowerCase()
       .includes(filterText.toLowerCase());
 
+    const categories = Array.isArray(game.category)
+      ? game.category
+      : [game.category];
+
     const matchesCategory =
-      categoryFilter === "" ||
-      game.category.includes(categoryFilter);
+      categoryFilter === "" || categories.includes(categoryFilter);
 
     return matchesSearch && matchesCategory;
   });

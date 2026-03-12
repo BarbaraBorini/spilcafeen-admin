@@ -24,7 +24,12 @@ export default function EditGame() {
   useEffect(() => {
     if (game) {
       setTitle(game.title || "");
-      setCategory(game.category || "");
+
+      const categoryValue = Array.isArray(game.category)
+        ? game.category[0]
+        : game.category;
+
+      setCategory(categoryValue || "");
       setPlayers(game.players || "");
       setTime(game.time || "");
     }
@@ -36,7 +41,7 @@ export default function EditGame() {
     const updatedGame = {
       id: Number(id),
       title,
-      category,
+      category: [category],   // important fix
       players,
       time,
     };

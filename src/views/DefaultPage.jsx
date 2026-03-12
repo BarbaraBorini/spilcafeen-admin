@@ -7,7 +7,7 @@ export default function DefaultPage() {
   const [games, setGames] = useState(() => {
     const savedGames = JSON.parse(localStorage.getItem("games")) || [];
 
-    // avoid duplicates when merging database + saved games
+    // merge database + saved games without duplicates
     const allGames = [...gamedatabase];
 
     savedGames.forEach((saved) => {
@@ -31,8 +31,12 @@ export default function DefaultPage() {
       .toLowerCase()
       .includes(filterText.toLowerCase());
 
+    const categories = Array.isArray(game.category)
+      ? game.category
+      : [game.category];
+
     const matchesCategory =
-      categoryFilter === "" || game.category.includes(categoryFilter);
+      categoryFilter === "" || categories.includes(categoryFilter);
 
     return matchesSearch && matchesCategory;
   });
