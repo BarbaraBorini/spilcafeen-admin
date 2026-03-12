@@ -4,10 +4,20 @@ import gamedatabase from "../data/gamedatabase";
 
 export default function DefaultPage() {
 
- const [games, setGames] = useState(() => {
-  const savedGames = JSON.parse(localStorage.getItem("games")) || [];
-  return [...gamedatabase, ...savedGames];
-});
+  const [games, setGames] = useState(() => {
+    const savedGames = JSON.parse(localStorage.getItem("games")) || [];
+
+    // avoid duplicates when merging database + saved games
+    const allGames = [...gamedatabase];
+
+    savedGames.forEach((saved) => {
+      if (!allGames.some((game) => game.id === saved.id)) {
+        allGames.push(saved);
+      }
+    });
+
+    return allGames;
+  });
 
   const [filterText, setFilterText] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
@@ -16,17 +26,21 @@ export default function DefaultPage() {
     localStorage.setItem("games", JSON.stringify(games));
   }, [games]);
 
-  const filteredGames = games.filter((game) =>
-    game.title.toLowerCase().includes(filterText.toLowerCase()) &&
-    (categoryFilter === "" || game.category === categoryFilter)
-  );
+  const filteredGames = games.filter((game) => {
+    const matchesSearch = game.title
+      .toLowerCase()
+      .includes(filterText.toLowerCase());
+
+    const matchesCategory =
+      categoryFilter === "" || game.category.includes(categoryFilter);
+
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <section className="user-games">
 
       <h2>Game Library</h2>
-
-      {/* Filters */}
 
       <div className="filters">
 
@@ -46,11 +60,12 @@ export default function DefaultPage() {
           <option value="Family">Family</option>
           <option value="Party">Party</option>
           <option value="Dice">Dice</option>
-          <option value="Abstract">Abstract</option>
+          <option value="Memory game">Memory game</option>
           <option value="Card game">Card game</option>
+          <option value="Abstract">Abstract</option>
           <option value="Word game">Word game</option>
           <option value="Classic">Classic</option>
-          <option value="Children">Children</option>
+          <option value="Children's game">Children's game</option>
           <option value="Cooperative">Cooperative</option>
           <option value="Storytelling">Storytelling</option>
         </select>

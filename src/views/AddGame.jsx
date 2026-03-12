@@ -30,7 +30,7 @@ export default function AddGame() {
     const highestId =
       games.length > 0
         ? Math.max(...games.map((game) => game.id))
-        : -1;
+        : 0;
 
     const newGame = {
       id: highestId + 1,
@@ -45,10 +45,17 @@ export default function AddGame() {
     navigate("/");
   }
 
-  const filteredGames = games.filter((game) =>
-    game.title.toLowerCase().includes(filterText.toLowerCase()) &&
-    (categoryFilter === "" || game.category === categoryFilter)
-  );
+  const filteredGames = games.filter((game) => {
+    const matchesSearch = game.title
+      .toLowerCase()
+      .includes(filterText.toLowerCase());
+
+    const matchesCategory =
+      categoryFilter === "" ||
+      game.category.includes(categoryFilter);
+
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <>
@@ -72,17 +79,19 @@ export default function AddGame() {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-         <option value="Strategy">Strategy</option>
-<option value="Family">Family</option>
-<option value="Party">Party</option>
-<option value="Dice">Dice</option>
-<option value="Abstract">Abstract</option>
-<option value="Card game">Card game</option>
-<option value="Word game">Word game</option>
-<option value="Classic">Classic</option>
-<option value="Children">Children</option>
-<option value="Cooperative">Cooperative</option>
-<option value="Storytelling">Storytelling</option>
+            <option value="">Select category</option>
+            <option value="Strategy">Strategy</option>
+            <option value="Family">Family</option>
+            <option value="Party">Party</option>
+            <option value="Dice">Dice</option>
+            <option value="Memory game">Memory game</option>
+            <option value="Card game">Card game</option>
+            <option value="Abstract">Abstract</option>
+            <option value="Word game">Word game</option>
+            <option value="Classic">Classic</option>
+            <option value="Children's game">Children's game</option>
+            <option value="Cooperative">Cooperative</option>
+            <option value="Storytelling">Storytelling</option>
           </select>
         </div>
 
@@ -118,23 +127,24 @@ export default function AddGame() {
             filter={filterText}
           />
 
-      <select
-  value={categoryFilter}
-  onChange={(e) => setCategoryFilter(e.target.value)}
->
-  <option value="">All categories</option>
-  <option value="Strategy">Strategy</option>
-  <option value="Family">Family</option>
-  <option value="Party">Party</option>
-  <option value="Dice">Dice</option>
-  <option value="Abstract">Abstract</option>
-  <option value="Card game">Card game</option>
-  <option value="Word game">Word game</option>
-  <option value="Classic">Classic</option>
-  <option value="Children">Children</option>
-  <option value="Cooperative">Cooperative</option>
-  <option value="Storytelling">Storytelling</option>
-</select>
+          <select
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+          >
+            <option value="">All categories</option>
+            <option value="Strategy">Strategy</option>
+            <option value="Family">Family</option>
+            <option value="Party">Party</option>
+            <option value="Dice">Dice</option>
+            <option value="Memory game">Memory game</option>
+            <option value="Card game">Card game</option>
+            <option value="Abstract">Abstract</option>
+            <option value="Word game">Word game</option>
+            <option value="Classic">Classic</option>
+            <option value="Children's game">Children's game</option>
+            <option value="Cooperative">Cooperative</option>
+            <option value="Storytelling">Storytelling</option>
+          </select>
         </div>
 
         {games.length === 0 ? (

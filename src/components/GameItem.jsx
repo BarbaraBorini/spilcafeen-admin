@@ -3,19 +3,44 @@ import { Link } from "react-router-dom";
 export default function GameItem({ game, deleteHandler }) {
   return (
     <div className="game-card">
+
+      {/* Category tags */}
+      <div className="category-tags">
+        {game.category.map((cat) => (
+          <span key={cat} className="category-tag">
+            {cat}
+          </span>
+        ))}
+      </div>
+
+      {/* Title */}
       <h3>{game.title}</h3>
 
-      <p><strong>Category:</strong> {game.category}</p>
-      <p><strong>Players:</strong> {game.players}</p>
-      <p><strong>Time:</strong> {game.time}</p>
+      {/* Game details */}
+      <div className="game-info">
+        <p>
+          <strong>Players:</strong> {game.players}
+        </p>
 
+        <p>
+          <strong>Time:</strong> {game.time}
+        </p>
+      </div>
+
+      {/* Actions */}
       <div className="game-actions">
-        <Link to={`/update/${game.id}`}>Edit game</Link>
+        <Link className="edit-btn" to={`/update/${game.id}`}>
+          Edit
+        </Link>
 
-        <button onClick={() => deleteHandler(game.id)}>
-          Delete game
+        <button
+          className="delete-btn"
+          onClick={() => deleteHandler(game.id)}
+        >
+          Delete
         </button>
       </div>
+
     </div>
   );
 }

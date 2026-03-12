@@ -41,8 +41,8 @@ export default function EditGame() {
       time,
     };
 
-    setGames(
-      games.map((g) =>
+    setGames((prevGames) =>
+      prevGames.map((g) =>
         g.id === Number(id) ? updatedGame : g
       )
     );
@@ -77,9 +77,18 @@ export default function EditGame() {
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="">Select category</option>
-          <option value="Beginner">Beginner</option>
-          <option value="Intermediate">Intermediate</option>
-          <option value="Expert">Expert</option>
+          <option value="Strategy">Strategy</option>
+          <option value="Family">Family</option>
+          <option value="Party">Party</option>
+          <option value="Dice">Dice</option>
+          <option value="Memory game">Memory game</option>
+          <option value="Card game">Card game</option>
+          <option value="Abstract">Abstract</option>
+          <option value="Word game">Word game</option>
+          <option value="Classic">Classic</option>
+          <option value="Children's game">Children's game</option>
+          <option value="Cooperative">Cooperative</option>
+          <option value="Storytelling">Storytelling</option>
         </select>
       </div>
 

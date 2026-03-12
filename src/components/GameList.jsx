@@ -8,12 +8,14 @@ export default function GameList({ games, setGames }) {
     );
 
     if (isConfirmed) {
-      setGames(games.filter((game) => game.id !== id));
+      setGames((prevGames) =>
+        prevGames.filter((game) => game.id !== id)
+      );
     }
   }
 
   return (
-    <>
+    <div className="game-list">
       {games.map((game) => (
         <GameItem
           key={game.id}
@@ -21,6 +23,6 @@ export default function GameList({ games, setGames }) {
           deleteHandler={deleteGameHandler}
         />
       ))}
-    </>
+    </div>
   );
 }
