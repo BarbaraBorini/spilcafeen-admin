@@ -7,10 +7,18 @@ export default function DefaultPage() {
   const [games, setGames] = useState(() => {
     const savedGames = JSON.parse(localStorage.getItem("games")) || [];
 
+    // normalize saved games so category is always an array
+    const normalizedSavedGames = savedGames.map((game) => ({
+      ...game,
+      category: Array.isArray(game.category)
+        ? game.category
+        : [game.category],
+    }));
+
     // merge database + saved games without duplicates
     const allGames = [...gamedatabase];
 
-    savedGames.forEach((saved) => {
+    normalizedSavedGames.forEach((saved) => {
       if (!allGames.some((game) => game.id === saved.id)) {
         allGames.push(saved);
       }
@@ -27,16 +35,14 @@ export default function DefaultPage() {
   }, [games]);
 
   const filteredGames = games.filter((game) => {
+
     const matchesSearch = game.title
       .toLowerCase()
       .includes(filterText.toLowerCase());
 
-    const categories = Array.isArray(game.category)
-      ? game.category
-      : [game.category];
-
     const matchesCategory =
-      categoryFilter === "" || categories.includes(categoryFilter);
+      categoryFilter === "" ||
+      game.category.includes(categoryFilter);
 
     return matchesSearch && matchesCategory;
   });
