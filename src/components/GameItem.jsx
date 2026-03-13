@@ -30,9 +30,6 @@ export default function GameItem({ game, deleteHandler }) {
 
       {/* Actions */}
       <div className="game-actions">
-        <Link className="edit-btn" to={`/update/${game.id}`}>
-          Edit
-        </Link>
 
         <button
           className="delete-btn"
@@ -40,6 +37,10 @@ export default function GameItem({ game, deleteHandler }) {
         >
           Delete
         </button>
+
+        <Link className="edit-btn" to={`/update/${game.id}`}>
+          Edit
+        </Link>
       </div>
 
     </div>

@@ -33,13 +33,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #1f2937;
+  background-image: url("assets/background.png");
+  background-size: cover;
   padding: 20px 40px;
   flex-wrap: wrap;
 }
 
 .logo a {
-  color: white;
+  color: #242424;
   text-decoration: none;
   font-size: 28px;
   font-weight: bold;
@@ -51,7 +52,7 @@ nav {
 }
 
 nav a {
-  color: white;
+  color: #242424;
   text-decoration: none;
   font-weight: 500;
 }
@@ -103,7 +104,24 @@ nav a:hover {
 }
 
 button {
-  background: #2563eb;
+  background: #7678ED;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #C80100;
+}
+
+.delete-btn:hover {
+  background: #C80100;
+}
+
+.edit-btn {
+  background: #7678ED;
   border: none;
   color: white;
   padding: 8px 14px;
@@ -112,7 +130,7 @@ button {
 }
 
 button:hover {
-  background: #1e40af;
+  background: #7678ED;
 }
 
 /* FORMS */
@@ -162,7 +180,7 @@ select {
 .site-footer {
   margin-top: 60px;
   padding: 25px;
-  background: #1f2937;
+  background: #7678ED;
   color: white;
   text-align: center;
 }
