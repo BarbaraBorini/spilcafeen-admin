@@ -18,7 +18,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/spilcafeen-admin/",
+    basename: "/spilcafeen-admin",
   }
 );
 
